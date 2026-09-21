@@ -1,0 +1,17 @@
+---
+layout: base.njk
+title: Andy Rice
+---
+<h1>Andy Rice</h1>
+<p>I'm Andy Rice. I write to figure out what I believe.</p>
+
+<h2>Essays</h2>
+<ul>
+{%- for essay in collections.essays | reverse %}
+  <li>
+    <a href="{{ essay.url }}">{{ essay.data.title }}</a>
+    <time datetime="{{ essay.date | isoDate }}">{{ essay.date | readableDate }}</time>
+    <p>{{ essay.data.description }}</p>
+  </li>
+{%- endfor %}
+</ul>
