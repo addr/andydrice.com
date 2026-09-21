@@ -1,5 +1,5 @@
 ---
-layout: mylayout.njk
+layout: base.njk
 title: My Rad Markdown Blog Post
 ---
 # Heading

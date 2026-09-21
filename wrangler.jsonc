@@ -2,7 +2,8 @@
   "name": "andydrice-com",
   "compatibility_date": "2026-09-21",
   "assets": {
-    "directory": "./_site"
+    "directory": "./_site",
+    "html_handling": "drop-trailing-slash"
   },
   "routes": [
     { "pattern": "andydrice.com", "custom_domain": true }

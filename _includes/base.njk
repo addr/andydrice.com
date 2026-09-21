@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}{% if page.url != "/" %} · {{ site.title }}{% endif %}</title>
+    {%- if description %}
+    <meta name="description" content="{{ description }}">
+    {%- endif %}
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  </head>
+  <body>
+    {%- if page.url != "/" %}
+    <header>
+      <a href="/">{{ site.title }}</a>
+    </header>
+    {%- endif %}
+    <main>
+      {{ content | safe }}
+    </main>
+  </body>
+</html>
