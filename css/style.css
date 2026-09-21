@@ -1,0 +1,27 @@
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  max-width: 66ch;
+  font-family: Charter, "Bitstream Charter", "Palatino Linotype", Palatino, Georgia, "Noto Serif", serif;
+  font-size: clamp(17px, 1rem + 0.5vw, 22px);
+  line-height: 1.4;
+  background: light-dark(#fffff8, #151515);
+  color: light-dark(#111111, #dddddd);
+}
+
+a {
+  color: inherit;
+}
+
+h1 {
+  font-size: 1.6em;
+  line-height: 1.2;
+}
+
+.footnotes-sep {
+  margin-top: 2em;
+}

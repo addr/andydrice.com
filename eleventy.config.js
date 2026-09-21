@@ -1,6 +1,8 @@
 import markdownItFootnote from "markdown-it-footnote";
 
 export default function (eleventyConfig) {
+  eleventyConfig.addPassthroughCopy("css");
+
   eleventyConfig.amendLibrary("md", (mdLib) => {
     mdLib.set({ typographer: true });
     mdLib.use(markdownItFootnote);
