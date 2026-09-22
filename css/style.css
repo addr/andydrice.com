@@ -1,27 +1,537 @@
+/* andydrice.com — global stylesheet. System fonts only, no client script. */
+
 :root {
   color-scheme: light dark;
+
+  --paper: light-dark(#f6efe2, #1d1913);
+  --ink: light-dark(#2a241c, #e6dccb);
+  --soft: light-dark(#6f6456, #a69c8c);
+  --hair: light-dark(#e0d7c6, #2c271f);
+  --rule-read: light-dark(#d3cab9, #3b352c);
+
+  /* One spot colour per essay: pages may set --spot-base inline. */
+  --spot-base: #b8673f;
+
+  --display: "Bodoni 72", "Bodoni 72 Oldstyle", Didot, "Big Caslon", "Hoefler Text", Georgia, serif;
+  --text: Charter, "Bitstream Charter", "Iowan Old Style", Georgia, serif;
+  --labels: Futura, "Avenir Next", "Gill Sans", "Century Gothic", "Segoe UI", system-ui, sans-serif;
+}
+
+/* Derived spot tokens live here (not inside :root) so an inline --spot-base
+   on body or .entry actually resolves through them. */
+:root, body, .entry {
+  --spot-dark: color-mix(in oklab, var(--spot-base) 62%, #f6efe2);
+  --spot: light-dark(var(--spot-base), var(--spot-dark));
+  /* Spot as running text needs more contrast on paper than spot as a rule. */
+  --spot-text: light-dark(color-mix(in oklab, var(--spot-base) 78%, #1a1008), var(--spot-dark));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--paper);
 }
 
 body {
   margin: 0 auto;
-  padding: 2rem 1rem;
-  max-width: 66ch;
-  font-family: Charter, "Bitstream Charter", "Palatino Linotype", Palatino, Georgia, "Noto Serif", serif;
-  font-size: clamp(17px, 1rem + 0.5vw, 22px);
-  line-height: 1.4;
-  background: light-dark(#fffff8, #151515);
-  color: light-dark(#111111, #dddddd);
+  min-height: 100vh;
+  max-width: 78rem;
+  padding: clamp(2.5rem, 7vh, 4.5rem) clamp(20px, 5vw, 72px) 3rem;
+  display: grid;
+  grid-template-columns: clamp(10rem, 16vw, 14rem) minmax(0, 1fr);
+  column-gap: clamp(2.5rem, 6vw, 6rem);
+  align-content: start;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 1.2rem;
+  line-height: 1.55;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  -webkit-font-smoothing: antialiased;
+  hanging-punctuation: first;
+}
+
+::selection {
+  background: var(--spot);
+  color: var(--paper);
 }
 
 a {
-  color: inherit;
+  color: var(--spot-text);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
-h1 {
-  font-size: 1.6em;
-  line-height: 1.2;
+a:focus-visible {
+  outline: 2px solid var(--spot);
+  outline-offset: 4px;
+  border-radius: 1px;
+}
+
+p {
+  margin: 0;
+}
+
+/* Labels: Futura tracked caps */
+
+.label {
+  font-family: var(--labels);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* The rail: wayfinding, the date, the mark */
+
+.rail {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  position: sticky;
+  top: clamp(2.5rem, 7vh, 4.5rem);
+  align-self: start;
+}
+
+.rail nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rail nav li {
+  position: relative;
+}
+
+.rail nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.rail nav a:hover {
+  color: var(--spot-text);
+}
+
+.rail nav li.here a {
+  color: var(--spot-text);
+}
+
+.rail nav li.here::before {
+  content: "";
+  position: absolute;
+  left: -1.1rem;
+  top: 0.62em;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--spot);
+}
+
+.rail .dateline {
+  color: var(--soft);
+}
+
+.rail .dateline time {
+  display: block;
+  color: var(--ink);
+}
+
+.mark {
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--ink);
+  display: block;
+}
+
+.rail .mark {
+  margin-top: auto;
+}
+
+/* The reading column */
+
+.main {
+  grid-column: 2;
+  border-top: 5px solid var(--ink);
+  padding-top: 1.6rem;
+  min-width: 0;
+}
+
+.main.plain {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.foot {
+  grid-column: 2;
+  margin-top: 4rem;
+  color: var(--soft);
+}
+
+.foot a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.foot a:hover {
+  color: var(--spot-text);
+}
+
+/* Index: one paragraph */
+
+.about {
+  max-width: 30em;
+  font-size: 1.45rem;
+  line-height: 1.45;
+}
+
+.about p {
+  margin: 0 0 0.75em;
+  text-wrap: pretty;
+}
+
+.about .init,
+.e-content > p:first-child::first-letter {
+  float: left;
+  font-family: var(--display);
+  font-style: normal;
+  font-weight: 400;
+  color: var(--spot);
+  line-height: 0.8;
+  padding: 0.07em 0.12em 0 0;
+}
+
+.about .init {
+  font-size: 5.7em;
+}
+
+.e-content > p:first-child::first-letter {
+  font-size: 4.9em;
+}
+
+.about .init-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.about .go {
+  font-family: var(--labels);
+  font-weight: 500;
+  font-size: 0.68em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.about .go:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1px;
+}
+
+.endmark {
+  display: inline-block;
+  vertical-align: -0.05em;
+  margin-left: 0.35em;
+}
+
+.endmark .mark {
+  display: block;
+}
+
+/* Essays list */
+
+h1.head {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  margin: 0 0 2.4rem;
+}
+
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 44rem;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 10.5rem minmax(0, 1fr);
+  gap: 0 1.6rem;
+  padding: 1.3rem 0 1.7rem;
+  border-top: 5px solid var(--spot);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.entry:visited {
+  border-top-color: var(--rule-read);
+}
+
+.entry:hover h2,
+.entry:focus-visible h2 {
+  color: var(--spot-text);
+}
+
+.entry .when {
+  grid-column: 1;
+  grid-row: 1;
+  padding-top: 0.45rem;
+}
+
+.entry h2 {
+  grid-column: 2;
+  grid-row: 1;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.85rem;
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  margin: 0 0 0.5rem;
+  text-wrap: balance;
+}
+
+.entries li:first-child h2 {
+  font-size: 2.35rem;
+}
+
+.entry .desc {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 1.08rem;
+  line-height: 1.5;
+  max-width: 34em;
+  color: var(--ink);
+}
+
+.under {
+  margin-top: 2.4rem;
+}
+
+/* Essay */
+
+article h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2rem, 3.3vw, 2.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.005em;
+  margin: 0 0 1.2rem;
+  max-width: 18em;
+  text-wrap: balance;
+}
+
+article .stand {
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  max-width: 34em;
+  margin: 0 0 2.6rem;
+  color: var(--soft);
+}
+
+.e-content {
+  max-width: 64ch;
+}
+
+.e-content p {
+  margin: 0 0 1em;
+  text-wrap: pretty;
+}
+
+.e-content > :nth-last-child(1 of :not(.footnotes-sep, .footnotes))::after {
+  content: "";
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  background: var(--spot);
+  margin-left: 0.4em;
+  vertical-align: -0.02em;
+}
+
+.e-content h2,
+.e-content h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 2em 0 0.6em;
+}
+
+.e-content h2 {
+  font-size: 1.85rem;
+}
+
+.e-content h3 {
+  font-size: 1.45rem;
+}
+
+.e-content blockquote {
+  margin: 1.4em 0;
+  padding-left: 1.2em;
+  border-left: 1px solid var(--ink);
+  font-style: italic;
+}
+
+.e-content ul,
+.e-content ol {
+  padding-left: 1.4em;
+  margin: 0 0 1em;
+}
+
+.e-content hr {
+  border: 0;
+  border-top: 1px solid var(--hair);
+  margin: 2.4em 0;
+}
+
+.e-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.e-content code {
+  font-family: Menlo, "SF Mono", Consolas, monospace;
+  font-size: 0.85em;
+}
+
+.e-content pre {
+  overflow-x: auto;
+  padding: 1em;
+  border: 1px solid var(--hair);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.e-content a:hover, .footnotes a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Footnotes (markdown-it-footnote) */
+
+.footnote-ref a {
+  font-family: var(--labels);
+  font-size: 0.7em;
+  text-decoration: none;
+  padding: 0 0.15em;
 }
 
 .footnotes-sep {
-  margin-top: 2em;
+  border: 0;
+  border-top: 1px solid var(--hair);
+  margin: 2.4em 0 1.2em;
+  max-width: 64ch;
+}
+
+.footnotes {
+  max-width: 64ch;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--soft);
+}
+
+.footnotes ol {
+  padding-left: 1.4em;
+  margin: 0;
+}
+
+.footnotes li {
+  margin-bottom: 0.6em;
+}
+
+.footnotes p {
+  margin: 0;
+}
+
+.footnote-backref {
+  text-decoration: none;
+  margin-left: 0.3em;
+}
+
+/* Phone: the rail becomes one line, the grid folds to one column */
+
+@media (max-width: 720px) {
+  body {
+    grid-template-columns: 1fr;
+    padding-top: 1.6rem;
+    row-gap: 1.6rem;
+    font-size: 1.1rem;
+  }
+
+  .rail {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1.4rem;
+    grid-column: 1;
+  }
+
+  .rail nav ul {
+    display: flex;
+    gap: 1.4rem;
+  }
+
+  .rail nav li.here::before {
+    display: none;
+  }
+
+  .rail .mark {
+    margin-top: 0;
+    margin-left: auto;
+  }
+
+  .rail nav {
+    flex-basis: 100%;
+  }
+
+  .rail .dateline {
+    flex: 1 1 auto;
+  }
+
+  .main,
+  .foot {
+    grid-column: 1;
+  }
+
+  .about {
+    font-size: 1.25rem;
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+  }
+
+  .entry .when,
+  .entry h2,
+  .entry .desc {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .entry .when {
+    padding-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  h1.head {
+    font-size: 2.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a {
+    transition: color 0.15s ease-out;
+  }
 }

@@ -1,17 +1,10 @@
 ---
 layout: base.njk
 title: Andy Rice
+description: Essays by Andy Rice on what makes a good life, written to figure out what he believes.
 ---
-<h1>Andy Rice</h1>
-<p>I'm Andy Rice. I write to figure out what I believe.</p>
-
-<h2>Essays</h2>
-<ul>
-{%- for essay in collections.essays | reverse %}
-  <li>
-    <a href="{{ essay.url }}">{{ essay.data.title }}</a>
-    <time datetime="{{ essay.date | isoDate }}">{{ essay.date | readableDate }}</time>
-    <p>{{ essay.data.description }}</p>
-  </li>
-{%- endfor %}
-</ul>
+<main class="main about h-card">
+  <p><span class="init" aria-hidden="true">I</span><span class="init-text">I</span>’m <span class="p-name">Andy Rice</span>. I write to figure out what I believe. Most of what I’m working out is an old question: what makes a good life, and how to build one for yourself and for the people around you. Lately that has meant figuring out what it means to be human in a world where intelligence is cheap, while wisdom is scarce. <a class="go" href="/essays">Essays</a><span class="endmark">{% include "mark.njk" %}</span></p>
+  <a class="u-url" href="/" hidden>andydrice.com</a>
+</main>
+<footer class="foot label">All rights reserved</footer>

@@ -1,15 +1,21 @@
 ---
 layout: base.njk
+railDate: true
+markInRail: true
 ---
-<article class="h-entry">
-  <header>
-    <h1 class="p-name">{{ title }}</h1>
-    <p>
-      <a class="p-author h-card" href="/">{{ site.author }}</a>,
-      <time class="dt-published" datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
-    </p>
-  </header>
-  <div class="e-content">
-    {{ content | safe }}
-  </div>
-</article>
+<main class="main">
+  <article class="h-entry">
+    <header>
+      <h1 class="p-name">{{ title }}</h1>
+      <p class="stand p-summary">{{ description }}</p>
+    </header>
+    <div class="e-content">
+      {{ content | safe }}
+    </div>
+    <footer class="foot label">
+      <a class="p-author h-card" href="/">{{ site.author }}</a> · All rights reserved
+      <a class="u-url" href="{{ site.url }}{{ page.url }}" hidden>{{ site.url }}{{ page.url }}</a>
+      <time class="dt-published" datetime="{{ page.date | isoDate }}" hidden>{{ page.date | readableDate }}</time>
+    </footer>
+  </article>
+</main>

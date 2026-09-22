@@ -16,6 +16,7 @@ export default {
         updated: z.optional(z.coerce.date()),
         draft: z.optional(z.boolean()),
         syndication: z.optional(z.array(z.string().url())),
+        spot: z.optional(z.string().regex(/^#[0-9a-f]{6}$/i)),
       })
       .safeParse(data);
 

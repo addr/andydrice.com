@@ -10,14 +10,21 @@
     <link rel="canonical" href="{{ site.url }}{{ page.url }}">
     <link rel="stylesheet" href="/css/style.css">
   </head>
-  <body>
-    {%- if page.url != "/" %}
-    <header>
-      <a href="/">{{ site.title }}</a>
-    </header>
-    {%- endif %}
-    <main>
-      {{ content | safe }}
-    </main>
+  <body{% if spot %} style="--spot-base: {{ spot }}"{% endif %}>
+    <aside class="rail">
+      <nav class="label" aria-label="Site">
+        <ul>
+          <li{% if page.url == "/" %} class="here"{% endif %}><a href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>{{ site.title }}</a></li>
+          <li{% if page.url == "/essays" %} class="here"{% endif %}><a href="/essays"{% if page.url == "/essays" %} aria-current="page"{% endif %}>Essays</a></li>
+        </ul>
+      </nav>
+      {%- if railDate %}
+      <p class="label dateline">Published<time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time></p>
+      {%- endif %}
+      {%- if markInRail %}
+      {% include "mark.njk" %}
+      {%- endif %}
+    </aside>
+    {{ content | safe }}
   </body>
 </html>

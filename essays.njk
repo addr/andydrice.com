@@ -1,0 +1,22 @@
+---
+layout: base.njk
+title: Essays
+description: Essays by Andy Rice, newest first.
+permalink: /essays/
+---
+<main class="main plain">
+  <h1 class="head">Essays</h1>
+  <ol class="entries h-feed">
+  {%- for essay in collections.essays | reverse %}
+    <li class="h-entry">
+      <a class="entry u-url" href="{{ essay.url }}"{% if essay.data.spot %} style="--spot-base: {{ essay.data.spot }}"{% endif %}>
+        <h2 class="p-name">{{ essay.data.title }}</h2>
+        <span class="when label"><time class="dt-published" datetime="{{ essay.date | isoDate }}">{{ essay.date | readableDate }}</time></span>
+        <span class="desc p-summary">{{ essay.data.description }}</span>
+      </a>
+    </li>
+  {%- endfor %}
+  </ol>
+  <p class="under">{% include "mark.njk" %}</p>
+</main>
+<footer class="foot label">All rights reserved</footer>
