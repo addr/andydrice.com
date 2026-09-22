@@ -50,6 +50,7 @@ Confirmed and durable:
 - Single global stylesheet, CSS only.
 - Visual world: a mid-century magazine identity program (warm paper, one spot colour per essay, strict two-column grid, drop initial, heavy rule, a small mark). Durable tokens and rules live in DESIGN.md.
 - Optional `spot` frontmatter field on an essay: a hex colour used as that essay's spot colour. Defaults to the house terracotta.
+- The home page is one paragraph about Andy with the Essays link as its only door. The newest essay gets no pointer there; no job or place, no contact or social links. The essay list lives at `/essays`. Decided 2026-09-22.
 
 Negotiable in a later design pass (iteration-one scoping, not commitments):
 
@@ -64,7 +65,6 @@ Committed roadmap, not yet built:
 
 Open decisions:
 
-- Whether the newest essay gets a pointer on the home page beyond the Essays link. (Resolved 2026-09-22: the home page is one paragraph about Andy with inline links only, no job or place, no contact or social links; the essay list lives at `/essays`.)
 - Whether shorter notes or evolving pieces ever join the essays. Not planned.
 - Retiring the 2017 Jekyll blog and the `www` redirect are in-flight infrastructure issues (#4, #5), not product decisions.
 
